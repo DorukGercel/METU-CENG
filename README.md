@@ -1,2 +1,2 @@
-# METU-CENG
-Middle East Technical University Computer Engineering Department Homework and Assignments
+# METU CENG Assignments
+Assignments and solutions that are given in the department
