@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{amsmath}
+
+
+\usepackage[hmargin=3cm,vmargin=6.0cm]{geometry}
+\topmargin=-2cm
+\addtolength{\textheight}{6.5cm}
+\addtolength{\textwidth}{2.0cm}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+\usepackage{indentfirst}
+\usepackage{amsfonts}
+
+\begin{document}
+
+\section*{Student Information}
+
+Name : Doruk Gerçel\\
+
+ID : 2310027\\
+
+
+\section*{Answer 1}
+We will need the marginal distributions of variables X and Y, and we can compute them by using the Addition Rule to their joint distributions.\\
+$P_X(x) = \sum_{y} P_{(X,Y)}(x,y)$ and $P_Y(y) = \sum_{x} P_{(X,Y)}(x,y)$. Therefore:\\ \\
+$P_X(0) = P_{(X,Y)}(0,0) + P_{(X,Y)}(0,2) = \frac{1}{12} + \frac{2}{12} = \frac{3}{12} = 1/4$\\ \\
+$P_X(1) = P_{(X,Y)}(1,0) + P_{(X,Y)}(1,2) = \frac{4}{12} + \frac{2}{12} = \frac{6}{12} = 1/2$\\ \\
+$P_X(2) = P_{(X,Y)}(2,0) + P_{(X,Y)}(2,2) = \frac{1}{12} + \frac{2}{12} = \frac{3}{12} = 1/4$\\ \\
+$P_Y(0) = P_{(X,Y)}(0,0) + P_{(X,Y)}(1,0) + P_{(X,Y)}(2,0) = \frac{1}{12} + \frac{4}{12} + \frac{1}{12} = \frac{6}{12} = 1/2$\\ \\
+$P_Y(2) = P_{(X,Y)}(0,2) + P_{(X,Y)}(1,2) + P_{(X,Y)}(2,2) = \frac{2}{12} + \frac{2}{12} + \frac{2}{12} = \frac{6}{12} = 1/2$\\ \\
+\subsection*{a)}
+$E(X) = \mu = \sum_x xP(X) = (0)(\frac{1}{4}) + (1)(\frac{1}{2}) + (2)(\frac{1}{4}) = 1$\\ \par 
+$Var(X) = E(X-EX)^2 = \sum_x(x-\mu)^2P(x)$ \\ \par 
+$=(0-1)^2(\frac{1}{4}) + (1-1)^2(\frac{1}{2}) + (2-1)^2(\frac{1}{4})$ \\ \par 
+$=(1)(\frac{1}{4}) + (0)(\frac{1}{2}) + (1)(\frac{1}{4}) = 1/2$
+\subsection*{b)}
+$X + Y = Z$ and $P\lbrace X = x \cap Y = y \rbrace = P(x,y)$\\ \par 
+$P_Z(0) = P(X + Y = 0) = P(0,0) = 1/12$\\ \par 
+$P_Z(1) = P(1,0) = \frac{4}{12} = 1/3$\\ \par 
+$P_Z(2) = P(2,0) + P(0,2) = \frac{1}{12} + \frac{2}{12} = \frac{3}{12} = 1/4$ \\ \par 
+$P_Z(3) = P(1,2) = \frac{2}{12} = 1/6$\\ \par 
+$P_Z(4) = P(2,2) = \frac{2}{12} = 1/6$
+\subsection*{c)}
+$Cov(X,Y) = E \lbrace (X - EX)(Y - EY) \rbrace = E(XY) - E(X)E(Y)$\\ \par 
+$E(XY) = \sum_x \sum_y xyP(x,y)$\\ \par 
+$= (0)(0)P(0,0) + (1)(0)P(1,0) + (2)(0)P(2,0) + (0)(2)P(0,2) + (1)(2)P(1,2) + (2)(2)P(2,2)$\\ \par 
+$= 0 + 0 + 0 + 0 + (2)(\frac{2}{12}) + (4)(\frac{2}{12}) = \frac{4 + 8}{12} = 1$
+\\ \par 
+$E(X) = \sum_x xP_X(x) = (0)P_X(0) + (1)P_X(1) + (2)P_X(2) = (0)(\frac{1}{4}) + (1)(\frac{1}{2}) + (2)(\frac{1}{4}) = 1$\\ \par 
+$E(Y) = \sum_y yP_Y(y) = (0)P_Y(0) + (2)P_Y(2) = (0)(\frac{1}{2}) + (2)(\frac{1}{2}) = 1$\\ \par 
+$Cov(X,Y) = 1 - (1)(1) = 0$
+\subsection*{d)}
+We know that, if A and B are independent variables, then P(A,B) = P(A).P(B) according to the lemma.\\ \par 
+Cov(A,B) = E(A.B) - E(A).E(B)\\ \par
+$E(A.B) = \sum_a \sum_b a.b.P(a,b)$\\ \par 
+$E(A).E(B) = \sum_a a.P(a). \sum_b b.P(b)$\\ \par 
+If A and B are independent variables then $E(A.B)$ will be equal to $\sum_a \sum_b a.b.P(a,b) = \sum_a a.P(a). \sum_b b.P(b)$. Therefore:\\ \par 
+$Cov(A,B) = E(A.B) - E(A).E(B) = \sum_a \sum_b a.b.P(a,b) - \sum_a a.P(a). \sum_b b.P(b)$ \\ \par 
+$= \sum_a a.P(a). \sum_b b.P(b) - \sum_a a.P(a). \sum_b b.P(b)$\\ \par 
+= 0
+\subsection*{e)}
+If X and Y are independent variables, then $P(x,y) = P(x).P(y)$ must hold for every value of x and y.\par
+We can observe that $P_{(X,Y)}(0,0) = 1/12 \neq P_X(0).P_Y(0) = \frac{1}{4} . \frac{1}{2} = 1/8$ \par 
+As we can show a counter-example, we can conclude that variables X and Y aren't independent.
+\section*{Answer 2}
+The probability for a pen to be broken is 0.2, and it is our probability of success in this question. Then according to complement rule our probability of failure is $q = 1 - p = 1 - 0.2 = 0.8$ (Probability for a pen to be NOT broken).  
+\subsection*{a)}
+This is the Binomial Distribution.\\ \par 
+$P(x) = \binom {n}{x} p^x q^{n-x}$ is the probability mass function for this distribution. (x is the number of successes and n is the number of trials)\\ \par 
+As we need to find at least 3 pens to be broken we are trying to find $P\lbrace X \geq 3 \rbrace$.\\ \par 
+$P\lbrace X \geq 3 \rbrace = 1 - P\lbrace X \leq 2 \rbrace$ according to the complement rule. Also $P\lbrace X \leq 2 \rbrace = F(2)$ so,\\ \par
+$P\lbrace X \geq 3 \rbrace = 1 - F(2)$\\ \par 
+We have parameters n = 12, p = 0.2 and x = 2. From Table A2, from our textbook we can find the value of F(2).\\ \par 
+F(2) = 0.558 according to the table. Therefore:\\ \par 
+$P\lbrace X \geq 3 \rbrace = 1 - 0.558 =  0.442$
+ 
+
+\subsection*{b)}
+This is the Negative Binomial Distribution.\\ \par 
+$P(x) = \binom {x-1}{k-1}.p^k.q^{x-k}$ is the probability mass function for this distribution.(x is number of trials and k is the number of successes)\\ \par 
+$P(5) = \binom {5-1}{2-1}.p^{2}.q^{5-2} = \binom{4}{1}.p^{2}.q^{3}$\\ \par 
+$= \frac{4!}{1!.3!}(0.2)^2(0.8)^3 \approx 0.0819$
+\subsection*{c)}
+This is the Negative Binomial Distribution. To find the average we must compute the expected value.(Expectation)\\ \par 
+$E(X) = \frac{k}{p}$ is the expectation for this distribution, which means it is the expected number of trials to obtain the k number of successes.(k is the number of successes and p is the probability of success. In our case p is the probability for a pen to be broken.)\\ \par 
+$E(X) = \frac{4}{0.2} = 20$
+\section*{Answer 3}
+\subsection*{a)}
+This is the Exponential Distribution.\\ \par 
+$F_T(t) = 1 - e^{-\lambda t}$ is the cumulative distribution function and $E(T) = \frac{1}{\lambda}$ is the expectation for this distribution. (where $\lambda$ is the frequency parameter)\\ \par 
+We are trying to find the possibility that the time required to get the first call is greater than 2 hours. So we try to find $P_T\lbrace T > 2\rbrace$.\\ \par 
+$P_T\lbrace T > 2 \rbrace = 1 - P_T \lbrace T \leq 2 \rbrace$ according to complement rule.\\ \par 
+$E(T) = \frac{1}{\lambda} = 4$ hrs, so $\lambda = 0.25$ $hrs^{-1}$.\\ \par 
+$F_T(2) = P_T\lbrace T \leq 2 \rbrace = 1 - e^{-\lambda t} = 1 - e^{-0.5}$\\ \par 
+$P_T\lbrace T > 2 \rbrace = 1 - 1 + e^{-0.5} = e^{-0.5} \approx 0.607$
+\subsection*{b)}
+This is the Gamma Distribution. In this question we are going to use the relation between the Gamma distribution and the Poisson distribution. We will use a $Gamma(\alpha , \lambda)$ variable T and a $Poisson(\lambda t)$ variable X. We have already found that $\lambda = 0.25$ and as we are dealing with the 3rd rare event our $\alpha = 3$. We try to find the value of $P_T\lbrace T \geq 10 \rbrace$.\\ \par 
+$P_T\lbrace T \geq 10 \rbrace = P_X \lbrace X \leq 3\rbrace$\\ \par 
+$P_X\lbrace X \leq 3 \rbrace = F_X(3)$, we can look at the Table A3 from our textbook for the Poisson Distribution. (x = 3, t = 10 and $\lambda = 0.25$, so $\lambda t = 2.5$. We use this value when we look at the table.)\\ \par 
+$F_X(3) = P_T \lbrace T \geq 10 \rbrace = 0.758$
+\subsection*{c)}
+This is the Gamma Distribution. We will deal with $Gamma(\alpha , \lambda)$ variable T where $\alpha = 3$ and $\lambda = 0.25$. We are trying to find $P_T \lbrace T \geq 16 \mid T \geq 10 \rbrace$.\\ \par 
+$P_T \lbrace T \geq 16 \mid T \geq 10 \rbrace = \frac{P_T \lbrace T \geq 16 \cap T \geq 10 \rbrace}{P_T \lbrace T \geq 10 \rbrace} = \frac{P_T \lbrace T \geq 16 \rbrace}{P_T \lbrace T \geq 10 \rbrace}$\\ \par 
+$P_T\lbrace T \geq 16 \rbrace = P_X \lbrace X \leq 3 \rbrace = F_X(3)$\\ \par 
+We can compute the $F_X(3)$ by looking at the Table A3 for the Poisson Distribution, where parameters $x = 3$, $t = 16$ and $\lambda = 0.25$, so $\lambda t = 4$. We will use this value when we look at the table. \\ \par 
+$F_X(3) = P_T \lbrace T \geq 16 \rbrace = 0.433$. We have already computed the value of $P_T \lbrace T \geq 10 \rbrace = 0.758$ in 3B.\\ \par 
+$P_T \lbrace T \geq 16 \mid T \geq 10 \rbrace = \frac{P_T \lbrace T \geq 16 \rbrace}{P_T \lbrace T \geq 10 \rbrace} = \frac{0.433}{0.758} \approx 0.571$
+\end{document}

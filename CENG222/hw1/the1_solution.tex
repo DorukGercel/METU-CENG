@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{amsmath}
+
+
+\usepackage[hmargin=3cm,vmargin=6.0cm]{geometry}
+\topmargin=-2cm
+\addtolength{\textheight}{6.5cm}
+\addtolength{\textwidth}{2.0cm}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+\usepackage{indentfirst}
+\usepackage{amsfonts}
+
+\begin{document}
+
+\section*{Student Information}
+
+Name : Doruk Gerçel\\
+
+ID : 2310027\\
+
+
+\section*{Answer 1}
+\subsection*{a)}
+X (Y) stands for choosing from Box X (Box Y).\\ \par
+G (B) stands for choosing a green (blue) ball.\\ \par 
+$ P \lbrace G \mid X \rbrace = \frac{P \lbrace G \cap X \rbrace}{P \lbrace X \rbrace}
+= \frac{P\lbrace G \rbrace \ast P\lbrace X \rbrace}{P \lbrace X \rbrace}$\\ \par
+$= \frac{(2/6) \ast 0.4}{0.4} = 2/6 = 1/3 = 0.33$
+\subsection*{b)}
+As choosing from Box X and 	Box Y are mutually exclusive events and they are exhaustive: \\ \par
+$P \lbrace Red \rbrace = P \lbrace X \cap Red \rbrace \cup P \lbrace Y \cap Red \rbrace$\\ \par
+$= P \lbrace X \rbrace \ast P \lbrace Red \rbrace + P \lbrace Y \rbrace \ast P \lbrace Red \rbrace$\\ \par 
+$= \frac{4}{10} \ast \frac{2}{6} + \frac{6}{10} \ast \frac{1}{5} = 19/75$
+\subsection*{c)}
+According to Bayes Rule: \\ \par
+$ P \lbrace Y \mid B \rbrace = \frac{P \lbrace B \mid Y \rbrace \ast P \lbrace Y \rbrace}{P \lbrace B \rbrace}$\\ \par 
+$P \lbrace B \rbrace = P \lbrace X \cap B \rbrace \cup P \lbrace Y \cap B \rbrace$\\ \par
+$= P \lbrace X \rbrace \ast P \lbrace B \rbrace + P \lbrace Y \rbrace \ast P \lbrace B \rbrace$\\ \par 
+$= \frac{4}{10} \ast \frac{2}{6} + \frac{6}{10} \ast \frac{2}{5} = 28/75$ \\ \par 
+As there are 2 blue balls out of 5 balls in Box Y, and it is known that we choose Box Y\\ \par 
+$ P \lbrace B \mid Y \rbrace = 2/5$ \\ \par 
+We already know $P \lbrace Y \rbrace$ is the complement of $P \lbrace X \rbrace$ so;\\ \par 
+$P \lbrace Y \rbrace = 0.6$
+Therefore the answer is \\ \par 
+$\frac{(2/5) \ast (6/10)}{28/75} = 9/14$
+
+\section*{Answer 2}
+\subsection*{a)}
+If events A and B are mutually exclusive then $A \cap B = \emptyset$. If we take complement of both sides of the equality we get $\overline{A \cap B} = \overline{\emptyset}$ and it is equal to $\overline{A} \cup \overline{B} = \Omega$\\ \par 
+Therefore we can see that when A and B are mutually exclusive their complements are exhaustive and vice versa. So this statement is true.
+\subsection*{b)}
+Let's say $C \subset B$ and $A \cap B = \emptyset$. Therefore  
+$\overline{A} \cup \overline{B} = \Omega$. So as C is a subset of B we can see that complements of the events A, B and C are exhaustive. But as C is a subset of B, and their intersection is not an empty set, they are not mutually exclusive. As this statement is an if and only if statement, we can just prove that it is false by proving one direction is false. Therefore this statement is false.
+\section*{Answer 3}
+\subsection*{a)}
+To have exactly two successful dices, the combinations of the dices must be (5,5), (5,6) or (5,6). But as we roll 5 dices, we must consider the fact that different dices may have these values. But we must notice that in the combinations (5,5) and (6,6) as both of the dices will have the same value, we must exclude repetition of these dices. To consider all the placements of the dices we will use permutation.\\ \par 
+Case (5,5) (We excluded repetition): $\frac{1}{6} \ast \frac{1}{6} \ast \frac{4}{6} \ast \frac{4}{6} \ast \frac{4}{6} \times \frac{5.4}{2}$ \\ \par
+Case (5,6): $\frac{1}{6} \ast \frac{1}{6} \ast \frac{4}{6} \ast \frac{4}{6} \ast \frac{4}{6} \times (5.4)$\\ \par 
+Case (6,6) (We excluded repetition): $\frac{1}{6} \ast \frac{1}{6} \ast \frac{4}{6} \ast \frac{4}{6} \ast \frac{4}{6} \times \frac{5.4}{2}$ \\ \par
+As these are all exclusive cases we can take their union (sum them) to find the probability of the event. Then the result is: \\ \par 
+= 80/243
+\subsection*{b)}
+"At least 2" is the complement statement of "at most 1". Therefore we can just find the probability of having at most 1 successful dice and then take its complement. \\ \par 
+To have at most 1 successful dice we either can roll (no successful), (5) or (6). For cases (5) and (6) we also must consider the different dices having these values.\\ \par 
+Case (no successful): $\frac{4}{6} \ast \frac{4}{6} \ast \frac{4}{6} \ast \frac{4}{6} \ast \frac{4}{6}$ \\ \par 
+Case (5): $\frac{1}{6} \ast \frac{4}{6} \ast \frac{4}{6} \ast \frac{4}{6} \ast \frac{4}{6} \times 5$ \\ \par
+Case (6): $\frac{1}{6} \ast \frac{4}{6} \ast \frac{4}{6} \ast \frac{4}{6} \ast \frac{4}{6} \times 5$ \\ \par
+When we sum these probabilities we find the probability of having "at most 1 successful dice" which is:\\ \par 
+=112/243\\ \par 
+To find our result we must find this values complement therefore we need to extract it from all possibilities which is 1. \\ \par 
+= 1 - (112/243) = 131/243
+\section*{Answer 4}
+\subsection*{a)}
+According to Addition Rule we can compute the marginal probabilities from the joint distribution.Therefore: \\ \par 
+P(A=1,C=0) = P(A=1,B=0,C=0) + P(A=1,B=1,C=0) = 0.06 + 0.09 = 0.15 
+\subsection*{b)}
+According to Addition Rule we can compute the marginal probabilities from the joint distribution.Therefore: \\ \\
+P(B=1) = P(A=0, B=1, C=0) + P(A=0, B=1, C=1) + P(A=1, B=1, C=0) + P(A=1, B=1, C=1)\\ \\ 
+P(B=1) = 0.21 + 0.02 + 0.09 + 0.08 \\ \\
+P(B=1) = 0.40
+\subsection*{c)}
+To check if A and B are independent or not we must check if P(A=a,B=b) = P(A=a)$\ast$P(B=b) for every value pair of a and b. First we must compute the marginal probabilities of according to variables A and B.\\ \par 
+P(A=0,B=0) = P(A=0,B=0,C=0) + P(A=0,B=0,C=1) = 0.14 + 0.08 = 0.22\\ \par 
+P(A=0,B=1) = P(A=0,B=1,C=0) + P(A=0,B=1,C=1) = 0.21 + 0.02 = 0.23\\ \par 
+P(A=1,B=0) = P(A=1,B=0,C=0) + P(A=1,B=0,C=1) = 0.06 + 0.32 = 0.38\\ \par 
+P(A=1,B=1) = P(A=1,B=1,C=0) + P(A=1,B=1,C=1) = 0.09 + 0.08 = 0.17\\ \\ \par
+P(A=0) = P(A=0, B=0) + P(A=0, B=1) = 0.22 + 0.23 = 0.45\\ \par 
+P(A=1) = P(A=1, B=0) + P(A=1, B=1) = 0.38 + 0.17 = 0.55\\ \par 
+P(B=0) = P(A=0, B=0) + P(A=1, B=0) = 0.22 + 0.38 = 0.60\\ \par 
+P(B=1) = P(A=0, B=1) + P(A=1, B=1) = 0.23 + 0.17 = 0.40\\ \par
+$P(A=0) \ast P(B=0) = 0.45 \ast 0.60 = 0.27$, therefore it is not equal to P(A=0,B=0) so variables A and B are NOT INDEPENDENT.
+\subsection*{d)}
+We check,
+$P(A \cap B \mid C) = P(A \mid C) \ast P(B \mid C)$ to see if variables A and B are conditionally independent or not. \\ \par 
+P(C) = 0.08 + 0.02 + 0.32 + 0.08 \\ \par 
+$P(A=0 \cap B=0 \mid C) = 0.08/0.5 = 0.16$\\ \par 
+$P(A=0 \cap B=1 \mid C) = 0.02/0.5 = 0.04$\\ \par 
+$P(A=1 \cap B=0 \mid C) = 0.32/0.5 = 0.64$\\ \par
+$P(A=1 \cap B=1 \mid C) = 0.08/0.5 = 0.16$\\ \par
+$P(A=0 \mid C) = 0.20$\\ \par
+$P(A=1 \mid C) = 0.80$\\ \par
+$P(B=0 \mid C) = 0.80$\\ \par
+$P(B=1 \mid C) = 0.20$\\ \par 
+We can easily observe that every pair of variables marginal probabilities multiplication is equal to the joint distribution of these variables, therefore we can say that A and B are conditionally independent.
+
+\end{document}
+

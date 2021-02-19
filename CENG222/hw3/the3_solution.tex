@@ -1,0 +1,138 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{amsmath}
+
+
+\usepackage[hmargin=3cm,vmargin=6.0cm]{geometry}
+\topmargin=-2cm
+\addtolength{\textheight}{6.5cm}
+\addtolength{\textwidth}{2.0cm}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+\usepackage{indentfirst}
+\usepackage{amsfonts}
+
+\usepackage{pgfplots}
+\usepackage{mathtools,amssymb}
+\usepackage{tikz}
+\usepackage{xcolor}
+\pgfplotsset{compat=1.7}
+
+\begin{document}
+
+\pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+\section*{Student Information}
+
+Name : Doruk Gerçel\\
+
+ID : 2310027\\
+
+
+\section*{Answer 1}
+In this question we have two samples. We have sample size n = 19, sample mean $\bar{X} = 3.375$ and sample standard deviation $s_X = 0.96$, for people with age 40 and above. Also we have sample size m = 15, sample mean $\bar{Y} = 2.05$ and sample standard deviation $s_Y = 1.12$, for people under 40. We will use the T-distribution in the following parts as we are analyzing samples with small sample sizes.
+\subsection*{a)}
+We need to find the degree of freedom by using the sample variances. We will use the formula that is known as Satterthwaite approximation.\\ \par 
+$\nu = \frac{(\frac{s_X^2}{n} + \frac{s_Y^2}{m})^2}{\frac{s_X^4}{n^2(n-1)} + \frac{s_Y^4}{m^2(m-1)}} = \frac{(\frac{0.96^2}{19} + \frac{1.12^2}{15})^2}{\frac{0.96^4}{19^2(18)} + \frac{1.12^4}{15^2(14)}} = 27.7 \approx 28$\\ \par 
+We are trying to build a 95$\%$ confidence interval so our $\alpha = 1 - 0.95 = 0.05 \Rightarrow \alpha / 2 = 0.025$.\par 
+We look at to the $t_{\alpha / 2} = t_{0.025}$ with 28 degrees of freedom from the table A.5 and $t_{0.025} = 2.048$.\par 
+Confidence interval for the difference of means, unequal, unknown standard deviations is\\ \par 
+$\bar{X} - \bar{Y} \pm t_{\alpha / 2} \sqrt{\frac{s_X^2}{n} + \frac{s_Y^2}{m}}$\\ \par 
+$= 3.375 - 2.05 \pm 2.048 \sqrt{\frac{0.96^2}{19} + \frac{1.12^2}{15}}$\\ \par 
+$=1.325 \pm (2.048)(0.363)$\\ \par 
+$=1.325 \pm 0.743$\\ \par 
+So the $95 \%$ confidence interval for the difference between the means is $\left[ 0.582, 2.068 \right]$.
+\subsection*{b)}
+We already obtained the degree of freedom from the Part A which is 28.\par 
+We are trying to build a $90\%$ confidence interval so our $\alpha = 1 - 0.9 = 0.1 \Rightarrow \alpha / 2 = 0.05$.\par 
+We look at to the $t_{\alpha / 2} = t_{0.05}$ with 28 degrees of freedom from the table A.5 and $t_{0.05} = 1.701$.\par 
+Confidence interval for the difference of means, unequal, unknown standard deviations is \par $\bar{X} - \bar{Y} \pm t_{\alpha / 2} \sqrt{\frac{s_X^2}{n} + \frac{s_Y^2}{m}}$\\ \par 
+$= 3.375 - 2.05 \pm 1.701 \sqrt{\frac{0.96^2}{19} + \frac{1.12^2}{15}}$\\ \par 
+$=1.325 \pm (1.701)(0.363)$\\ \par
+$=1.325 \pm 0.617$\\ \par 
+So the $90 \%$ confidence interval for the difference between the means is $\left[ 0.708, 1.942 \right]$.
+
+\subsection*{c)}
+We will use hypothesis testing as we are going to make a one-sided test.\par
+$H_0 : \mu = 3$\par 
+$H_A : \mu > 3$\par 
+As we are conducting a test with $95 \%$ confidence level, our $\alpha = 1 - 0.95 = 0.05$. We have a $n-1 = 19-1 = 18$ degree of freedom. Therefore when we check the table A.5 we find that $t_\alpha = t_{0.05} = 1.734$. As our alternative hypothesis is one-sided we will be conducting a right tail one-sided t test.\\ \par
+\begin{tikzpicture}
+
+\begin{axis}[no markers, domain=0:10, samples=100,
+axis lines*=middle, xlabel= \empty, ylabel= \empty,
+height=6cm, width=12cm,
+xticklabels={\empty,\empty, \empty,\empty,\empty, \empty,\empty,$1.734$,\empty}, ytick=\empty,
+enlargelimits=false, clip=false, axis on top,
+grid = major]
+\addplot [fill=red!20, draw=none, domain=2:4] {gauss(0,1)} \closedcycle;
+\addplot [fill=blue!20, draw=none, domain=-4:2] {gauss(0,1)} \closedcycle;
+\end{axis}
+\end{tikzpicture}
+
+Red part is the rejection ($[1.734, \infty]$) and blue part ($[-\infty, 1.734]$) is the acceptance region of $H_0$\\ \par
+
+$t = \frac{\bar{X} - \mu}{s/\sqrt{n}} = \frac{3.375 - 3}{0.96/\sqrt{19}} = 1.703$\\ \par 
+As our test statistic is in the acceptance region of $H_0$, we DON'T have enough support to conclude that people who are 40 or above 40 support BREXIT.
+\section*{Answer 2}
+\subsection*{a)}
+$H_0 : \mu = 20$
+\subsection*{b)}
+$H_A : \mu \neq 20$
+\subsection*{c)}
+If our statistical significance is $1 \%$ then $\alpha = 0.01$, with n-1 = 11-1 = 10 degree of freedom. We will be conducting a two-sided T-test according to the alternative hypothesis that we check. So we will be dealing with $t_{\alpha / 2} = t_{0.005} = 3.169$ (both the positive and the negative value as this is a two-sided test).\\ \par
+
+\begin{tikzpicture}
+
+\begin{axis}[no markers, domain=0:10, samples=100,
+axis lines*=middle, xlabel= \empty, ylabel= \empty,
+height=6cm, width=12cm,
+xticklabels={\empty,\empty, \empty,$-3.169$,\empty, \empty,\empty,$3.169$,\empty}, ytick=\empty,
+enlargelimits=false, clip=false, axis on top,
+grid = major]
+\addplot [fill=red!20, draw=none, domain=2:4] {gauss(0,1)} \closedcycle;
+\addplot [fill=blue!20, draw=none, domain=-2:2] {gauss(0,1)} \closedcycle;
+\addplot [fill=red!20, draw=none, domain=-4:-2] {gauss(0,1)} \closedcycle;
+\end{axis}
+\end{tikzpicture}
+
+Red part is the rejection ($[-\infty, -3.169] \cup [3.169, \infty]$) and blue part is the acceptance ($[-3.169, 3.169]$) region of $H_0$\\ \par
+
+The sample mean is $\bar{X} = 20.07$ and the sample standard deviation is $s = 0.07$.\par  
+The test statistic t:\\ \par 
+$t = \frac{\bar{X} - \mu _0}{s/\sqrt{n}} = \frac{20.07 - 20}{0.07/\sqrt{11}} = \sqrt{11} = 3.317$\\ \par 
+This test statistic value is out of accept region so we reject our $H_0$. Production must be stopped.
+\section*{Answer 3}
+$\mu _ X$: The average number in minutes of headache reduction by the new painkillers \par 
+$\mu _Y$: The average number in minutes of headache reduction by the painkillers in the market
+\subsection*{a)}
+$H_0 :\mu _X = \mu _Y \Rightarrow \mu _X - \mu _Y = 0$
+\subsection*{b)}
+$H_A :\mu _X < \mu _Y \Rightarrow \mu _X - \mu _Y < 0$
+\subsection*{c)}
+If our level of significance is $5 \%$ then $\alpha = 0.05$. We test the null hypothesis against a one-sided left-tail alternative, as we are only interested in if the new painkillers reduce the headache in less time than the market painkillers. When we look at the common values of the z values, we find that $z_\alpha = z_{0.05} = 1.645$ (we will directly use this z value as we are conducting a one-sided test).\\ \par
+
+\begin{tikzpicture}
+
+\begin{axis}[no markers, domain=0:10, samples=100,
+axis lines*=middle, xlabel= \empty, ylabel= \empty,
+height=6cm, width=12cm,
+xticklabels={\empty,\empty, \empty,$-1.645$,\empty, \empty,\empty, \empty,\empty}, ytick=\empty,
+enlargelimits=false, clip=false, axis on top,
+grid = major]
+\addplot [fill=blue!20, draw=none, domain=-2:4] {gauss(0,1)} \closedcycle;
+\addplot [fill=red!20, draw=none, domain=-4:-2] {gauss(0,1)} \closedcycle;
+\end{axis}
+\end{tikzpicture}
+
+Red part is the rejection ($[-\infty, -1.645]$) and blue part is the acceptance ($[-1.645, \infty]$) region of $H_0$\\ \par
+
+$Z = \frac{\bar{X} - \bar{Y}}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{2.8 - 3}{\sqrt{\frac{1.7^2}{68} + \frac{1.4^2}{68}}} = \frac{-0.2}{0.267} = -0.749$\\ \par 
+As our test statistic Z is in acceptance region, we can conclude that the evidence against $H_0$ is insufficient, so we can't state that new painkillers produce better results.  
+
+
+\end{document}
+
+
