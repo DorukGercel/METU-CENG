@@ -1,0 +1,45 @@
+CENG 435 HW2 README
+
+Name: Doruk Gerçel
+Student-ID: 2310027
+
+This assignment was submitted on December, 2020.
+
+How To Run the Program (with port numbers assigned to me):
+----------------------------------------------------------
+Client Side:
+python3 client.py 127.0.0.1 16084 16085 16080 16081
+Server Side:
+python3 server.py 16082 16083
+Simulator:
+./simulator_2wayTCP  127.0.0.1 127.0.0.1 16084 16085 16080 16082 16083 16086 16087 50 5 5
+
+Important Note:
+The name of the files which will be sent from the client to the server (both UDP and TCP) are not taken as an input, and are included in the source code (I didn't want to change the input format in the HW PDF). Example: the name of the file that UDP client sends to the UDP server is './transfer_file_UDP.txt' and the new created file in the server side is './new_transfer_file_UDP.txt'. Therefore the user must change both the name of the read and the write file from the source code.
+
+Delay Timeout Time:
+I implemented a dynamic timeout which changes according to the timeout values which are obtained. Timeout value starts from 1 second (as recomended in the PDF).
+
+Work:
+----
+I implemeted both a TCP Client-Server and a UDP Client-Server. The 'file' is read chunk by chunk in the Client side and sent to the Server side. In TCP I implemented a 2-sided TCP connection, when the server recieves the message it sends back a message (arbitrary character) to the client and then continue their communication. I created a new message format (please check the source code) therefore the server knows what to extract and what is the EOF chunk which is sent. As TCP is a reliable protocol I didn't need to check any further.
+
+I also implemented a UDP CLient-Server with a RDT protocol. I defined a message format just like in the TCP implementation. But I needed to perform more checkings in-order to achieve successful and reliable file transfer. (Will be mentioned in the RDT Protocol section with more details.)
+
+I know that UDP part of the homework was going to be much more challenging, therefore I started with the TCP part in-order to achieve a safe start. One of the biggest challenges in this homework was to understand the problems during the RDT protocol execution, because these problems were not easy to debug and observe. After more than a week implementation, I learned how to use TCP and UDP protocols, and most importantly how implement a RDT protocol on top of UDP.
+
+RDT Protocol:
+-------------
+I implemented a RDT Protocol which is similar to RDT3.0 in our lecture slides with minor changes. In the slides when the sender recieves an NACK, the sender doesn't do anything and waits for a timeout to occur. Also it uses 2 different numbers as a sequence number.
+
+In my implementation I changed these properties. When my sender (UDP Client) recieves a NACK message it resends the package immediately, therefore it becomes more responsive. But in-order to achieve that, I created sequence numbers in the range of number of chunks created. Therefore the size of the send message will increase (actually just one byte in every power of 10), therefore I chose a message segment size which is smaller than maximum segment size.
+
+The connection close between the server and client is an esential process. The client sends the last package of file with a special character therefore the server undertands that their communication is about to end, and enters a new state. Then the client sends the last file package again (after ack, this must be considered as a new package). Then when server recieves that package it exits. There might be a lost message between the server to client, therefore client can't be sure if the server exited or not. In-order to achieve that after a certain amount of time if the client exits (can exit quicker if it recieves an acknowledgement).
+
+Another feature of my RDT protocol, is that it can change it's 'delay timeout time' dynamically. It increases this time when a timeout occurs and decreses it when it recieves a correct ACK (still preserves a range).
+
+Also I want to mention another property that my RDT uses. We know that we need a checksum mechanism for reliable data transfer. I perform this by using a hash function. I first create a message, then I put it to a hash function and combine both of them, then send the merged message. Reciever applies the same hash function to the message part, and if the result calculated and the checksum recieved are different, returns an error. I made some research in-order to choose the appropiate hash function, and learned that SHA hash family is appropiate for data integrity. Therefore I use sha1() function which returns a 40 byte length encrypted message.
+
+Tester Note: I didn't delete some of the print() (they are commented) in the source code. Therefore the flow of the code can be more preciesely observed.
+
+
