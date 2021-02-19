@@ -1,0 +1,84 @@
+#/* $begin ncopy-ys */
+##################################################################
+# ncopy.ys - Copy a src block of len words to dst.
+# Return the number of positive words (>0) contained in src.
+#
+# Include your name and ID here.
+#
+# Describe how and why you modified the baseline code.
+#
+####################################################################
+# Doruk Gerçel 2310027
+####################################################################
+# Description:
+####################################################################
+#  To modify the code and to make it more optimised, I used 2x1 unrolling,
+#so in every iteration we place 2 values from source to destination.
+#At the begining of our code, we first check whether we have 2 or more
+#values. If we have less than 2 values the code jumps to Sigle part.
+#In this part we check whether we have 1 value or no value. If we have
+#1 value we go all through the Single part and perform 1 copy operation.
+#If we have no value at all we directly jump to Done part of the code.
+#  If we have 2 or more elements we start to go through the Loop stage.
+#First we copy two consecutive elements into registers, then we test if
+#the first element that we coppied is positive or not. If not positive,
+#we jump into Npos1, else we continue the code increment the positive
+#counter and fall through Npos1. We perform both move from register to
+#memory operations in this part. Also we set the conditionals if our
+#second value is positive or not. If not positive we directly jump to
+#Check part else we increment the positive counter and fall through the
+#Check part.
+#  In Check part we increment both rdi and rsi with 16 (we incremented
+#like that because we have two values which are both 8 bytes, 8*2 = 16)
+#We decrement the length with 2 and decide if we should jump to the Loop
+#or not. If we have less than 2 elements we have nothing left to do in 
+#Loop part, so we fall throught the Single part of the code. Else we 
+#continue the iteration.
+####################################################################
+##################################################################
+# Do not modify this portion
+# Function prologue.
+# %rdi = src, %rsi = dst, %rdx = len
+ncopy:
+
+##################################################################
+# You can modify this portion
+	# Loop header
+	iaddq $-1,%rdx		# len = len - 1;
+	irmovq $0,%rax		# count = 0;
+	jle Single		# Check if we have more than 1 elements, if not jump to Single
+
+Loop:	
+	mrmovq (%rdi), %r10	# read val1 from src
+	mrmovq 8(%rdi), %r11	# read val2 from src + 8
+	iaddq $0, %r10		# Makes an additon with val1 and adjusts sign flags
+	jle Npos1		# If non positive jumps to Npos1
+	iaddq $1, %rax		# positive count++
+Npos1:
+	rmmovq %r11, 8(%rsi)	# stores val2 to dst + 8
+	iaddq $0, %r11		# Makes an addition with val2 and adjusts sign flags
+	rmmovq %r10, (%rsi)	# stores val1 to dst
+	jle Check		# If non positive jumps to Check
+	iaddq $1, %rax		# positive count++
+Check:
+	iaddq $16, %rdi		# increment src with 8*2 = 16
+	iaddq $16, %rsi		# increment dst with 8*2 = 16
+	iaddq $-2,%rdx		# decrement length with 2
+	jg Loop			# if length is at least 2 jump to loop, else fall through
+Single:	
+	jl Done			# if there are no more values jump to Done
+	mrmovq (%rdi), %r10	# Do the last transfer from src to register
+	rmmovq %r10, (%rsi)	# Do the last transfer from register to dst
+	andq %r10, %r10		# Check if the last value is positive or not
+	jle Done		#If not jump to done
+	iaddq $1, %rax		#positive count++
+
+##################################################################
+# Do not modify the following section of code
+# Function epilogue.
+Done:
+	ret
+##################################################################
+# Keep the following label at the end of your function
+End:
+#/* $end ncopy-ys */

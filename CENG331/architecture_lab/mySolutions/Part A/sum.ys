@@ -1,0 +1,41 @@
+#Doruk Gerçel 2310027    
+# Execution begins at address 0
+    .pos 0
+irmovq stack, %rsp  # Set up stack pointer
+call main           # Execute main program
+halt                # Terminate program
+
+# Sample linked list
+    .align 8
+ele1:
+    .quad 0x00a
+    .quad ele2
+ele2:
+    .quad 0x0b0
+    .quad ele3
+ele3:
+    .quad 0xc00
+    .quad 0
+
+main:
+    irmovq ele1, %rdi       # set parameter as the address of the first object
+    call sum               #call sum_list(list_ptr ls)
+    ret
+
+sum:
+    irmovq $8, %rsi         # assign constant 8 into rsi
+    xorq %rax,%rax          # make sum 0
+    jmp test
+loop:
+    mrmovq (%rdi), %r8       # get the ele obj val
+    addq %r8, %rax          # add val to sum
+    addq %rsi, %rdi         # get the address of the pointed ele obj
+    mrmovq (%rdi), %rdi      # give the next ptr value to variable
+test:
+    andq %rdi, %rdi         # test if pointer is null or not
+    jne loop
+    ret
+
+# Stack starts here and grows to lower addresses
+    .pos 0x200
+stack:

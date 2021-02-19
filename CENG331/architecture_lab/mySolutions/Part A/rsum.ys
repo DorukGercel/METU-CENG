@@ -1,0 +1,44 @@
+#Doruk Gerçel 2310027    
+# Execution begins at address 0
+    .pos 0
+irmovq stack, %rsp  # Set up stack pointer
+call main           # Execute main program
+halt                # Terminate program
+
+# Sample linked list
+    .align 8
+ele1:
+    .quad 0x00a
+    .quad ele2
+ele2:
+    .quad 0x0b0
+    .quad ele3
+ele3:
+    .quad 0xc00
+    .quad 0
+
+main:
+    irmovq ele1, %rdi       # set parameter as the address of the first object
+    call rsum               #call rsum_list(list_ptr ls)
+    ret
+
+rsum:
+    irmovq $8, %r10         # assign constant 8 into rsi
+    andq %rdi, %rdi         # check whether ptr is null or not
+    je break
+recurse:
+    mrmovq (%rdi), %r11     # assign val to a variable
+    pushq %r11               # push this value to stack
+    addq %r10, %rdi         # increment the value of rdi 
+    mrmovq (%rdi), %rdi     # take the addres of next obj 
+    call rsum               # call recursive function
+    popq %r11               # take the before value from stack
+    addq %r11, %rax         # add it to recursive value
+    ret
+break:                      # break condition
+    irmovq $0, %rax
+    ret
+
+# Stack starts here and grows to lower addresses
+    .pos 0x200
+stack:
