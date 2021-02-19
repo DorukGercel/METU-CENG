@@ -1,0 +1,10 @@
+SELECT C.CourseName
+FROM Course C, Transcript T
+WHERE C.CourseId = T.CourseId
+GROUP BY T.CourseId
+HAVING AVG(T.Score) > (
+    SELECT AVG(T1.Score)
+    FROM Transcript T1
+    WHERE T1.CourseId = "ME202"
+    )
+order by C.CourseName;

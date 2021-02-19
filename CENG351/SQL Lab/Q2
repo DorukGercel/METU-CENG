@@ -1,0 +1,7 @@
+UPDATE Transcript
+SET Score = (Score * 110)/100
+WHERE StudentId IN (
+    SELECT S.StudentId 
+    FROM Student S
+    WHERE S.Status = 'Senior')
+    ;

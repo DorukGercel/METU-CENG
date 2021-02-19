@@ -1,0 +1,8 @@
+SELECT T.StudentId, COUNT(*) AS Count 
+FROM Transcript T
+WHERE EXISTS (
+    SELECT *
+    FROM Student S
+    WHERE S.StudentId = T.StudentId AND S.Address LIKE '%Springfield%')
+GROUP BY T.StudentId
+order by T.StudentId;

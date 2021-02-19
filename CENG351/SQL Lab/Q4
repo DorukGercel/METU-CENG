@@ -1,0 +1,13 @@
+SELECT P.ProfessorId, P.Age
+FROM Professor P
+WHERE P.Name<>"Waylon Smithers" AND NOT EXISTS
+    (
+    SELECT T.CourseId
+    FROM Teaching T, Professor Pr
+    WHERE T.ProfessorId = Pr.ProfessorId AND Pr.Name = "Waylon Smithers"
+    EXCEPT
+    SELECT T.CourseId
+    FROM Teaching T
+    WHERE T.ProfessorId = P.ProfessorId
+    )
+order by P.age;

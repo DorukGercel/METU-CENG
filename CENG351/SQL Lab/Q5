@@ -1,0 +1,5 @@
+SELECT C.CourseName, (MAX(S.age) - MIN(S.age)) AS ageWid
+FROM Student S, Course C, Transcript T
+WHERE S.StudentId = T.StudentId AND C.CourseId = T.CourseId
+GROUP BY T.CourseId
+order by C.CourseName, ageWid;
